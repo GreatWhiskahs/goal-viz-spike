@@ -1,0 +1,70 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<svg width="0" height="0">
+			<defs>
+				<linearGradient id="progress-low-gradient" x1="0" x2="0" y1="0" y2="1" gradientUnits="userSpaceOnUse">
+					<stop offset="0%" stop-color="red"/>
+					<stop offset="50%" stop-color="red" stop-opacity="0"/>
+					<stop offset="100%" stop-color="red"/>
+				</linearGradient>
+
+				<radialGradient id="test"
+					fx="5%" fy="5%" r="65%"
+					spreadMethod="pad">
+					<stop offset="0%"   stop-color="#00ee00" stop-opacity="1"/>
+					<stop offset="100%" stop-color="#006600" stop-opacity="1" />
+				</radialGradient>
+
+				 <filter id="virtual_light" filterUnits="objectBoundingBox" x="-0.1" y="-0.1" width="1.2" height="1.2"> 
+				      <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="alpha_blur"/>
+				      <feOffset in="alpha_blur" dx="4" dy="4" result="offset_alpha_blur"/>
+				      <feSpecularLighting in="alpha_blur" surfaceScale="5" specularConstant="1"
+				        specularExponent="15" lighting-color="#FFFFFF" result="spec_light">
+				        <fePointLight x="75" y="-400" z="250"/>
+				      </feSpecularLighting>
+				      <feComposite in="SourceGraphic" in2="spec_light" operator="out"/>
+				</filter>
+			</defs>
+		</svg>
+
+		<div class="goal">
+			<h3>Goal Title</h3>
+			<p>A description of that goal</p>
+
+			<div class="goal-progress-bar-container" style="display:none;"> 
+				<svg class="goal-progress-bar" width="1050" height="220">
+					<defs>
+
+					</defs>
+					<g filter=url("#virtual_light")>
+						<rect class="progress" x="25" y="10" rx="5" ry="5" width="0" height="50" fill="red" ></rect>
+
+						<!-- <path d="M35,10 C38,10 38,60 35,60" fill-opacity="0.0" style="stroke:gray; stroke-width:1;"> -->
+
+						<rect class="progress-bar" x="25" y="10" rx="5" ry="5" width="1000" height="50" fill="gray" fill-opacity="0.2"></rect>
+					</g>
+				</svg>
+			</div>
+
+			<div class="goal-chart-container"> 
+				<svg class="goal-chart" width="1050" height="400">
+
+
+				</svg>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+ 		<script type="text/javascript" charset="utf-8" src="d3.js"></script>
+		<script type="text/javascript" src="goal-visualizations.js"></script>
+		<script type="text/javascript" src="goal-progress-bar.js"></script>
+		<script type="text/javascript" src="goal-progress-chart.js"></script>
+		<script type="text/javascript">
+			Zepto(function(){
+				var progressBar = new GoalVisualizations.ProgressBar('.goal-progress-bar', 30);
+			})
+		</script>
+	</body>
+</html>
