@@ -2,6 +2,26 @@
 	<head>
 	</head>
 	<body>
+		<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+</style>
 		<svg width="0" height="0">
 			<defs>
 				<linearGradient id="progress-low-gradient" x1="0" x2="0" y1="0" y2="1" gradientUnits="userSpaceOnUse">
@@ -33,7 +53,7 @@
 			<h3>Goal Title</h3>
 			<p>A description of that goal</p>
 
-			<div class="goal-progress-bar-container" style="display:none;"> 
+			<div class="goal-progress-bar-container"> 
 				<svg class="goal-progress-bar" width="1050" height="220">
 					<defs>
 
@@ -49,13 +69,14 @@
 			</div>
 
 			<div class="goal-chart-container"> 
-				<svg class="goal-chart" width="1050" height="400">
+				<svg class="goal-chart" style="padding:50px;">
 
 
 				</svg>
 			</div>
 		</div>
 
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"> </script>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
  		<script type="text/javascript" charset="utf-8" src="d3.js"></script>
 		<script type="text/javascript" src="goal-visualizations.js"></script>
@@ -64,6 +85,21 @@
 		<script type="text/javascript">
 			Zepto(function(){
 				var progressBar = new GoalVisualizations.ProgressBar('.goal-progress-bar', 30);
+
+				var data = [
+					{
+						label: 'Projected (October 2013)',
+						color: '#009933',
+						points: [{x: 4, y:10},{x: 5, y:20},{x: 6, y:30}]
+					},
+					{
+						label: 'Actual',
+						color: '#CC0000',
+						points: [{x: 0, y:1},{x: 1, y:2},{x: 2, y:4},{x: 3, y:6},{x: 4, y:15}]
+					}
+					
+				];
+				var progressChart = new GoalVisualizations.ProgressChart('.goal-chart', data);
 			})
 		</script>
 	</body>

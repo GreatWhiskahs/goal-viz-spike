@@ -14,7 +14,7 @@ GoalVisualizations.ProgressBar = function(selector, data){
 		progress
 			.transition()
 			.attr("width", data * 10)
-			.ease(quad, 1000);
+			.ease('quad', 1000);
 	}
 
 
